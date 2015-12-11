@@ -16,20 +16,17 @@ import java.util.List;
 
 public final class Psapi {
 
-	static {
-		Native.register(NativeLibrary.getInstance("Psapi"));
-	}
-
 	public static Module getModule(GameProcess process, String name) {
 		WinDef.HMODULE[] lphModules = new WinDef.HMODULE[1024];
 		IntByReference lpcbNeededs = new IntByReference();
+		PsapiStdCall.LPMODULEINFO moduleInfo = new PsapiStdCall.LPMODULEINFO();
+
 		EnumProcessModulesEx(process.pointer(), lphModules, lphModules.length, lpcbNeededs, 0x03);
 		for (int i = 0; i < lpcbNeededs.getValue() / 4; i++) {
 			WinDef.HMODULE hModule = lphModules[i];
-			PsapiStdCall.LPMODULEINFO moduleInfo = new PsapiStdCall.LPMODULEINFO();
 			if (GetModuleInformation(process.pointer(), hModule, moduleInfo, moduleInfo.size())) {
 				if (moduleInfo.lpBaseOfDll != null) {
-					String moduleName = Psapi.GetModuleBaseNameA(process.pointer(), hModule);
+					String moduleName = GetModuleBaseNameA(process.pointer(), hModule);
 					if (name.equals(moduleName)) {
 						return new Module(process, name, Pointer.nativeValue(hModule.getPointer()), moduleInfo.SizeOfImage);
 					}
@@ -37,10 +34,6 @@ public final class Psapi {
 			}
 		}
 		throw new NullPointerException("Could not find module " + name);
-	}
-
-	public static boolean EnumProcessModulesEx(Pointer hProcess, WinDef.HMODULE[] lphModule, int cb, IntByReference lpcbNeededs, int flags) {
-		return psapi.EnumProcessModulesEx(hProcess, lphModule, cb, lpcbNeededs, flags);
 	}
 
 	public static native boolean GetModuleInformation(Pointer hProcess, WinDef.HMODULE hModule, PsapiStdCall.LPMODULEINFO lpmodinfo, int cb);
@@ -51,6 +44,14 @@ public final class Psapi {
 		byte[] lpImageFileName = new byte[128];
 		GetModuleBaseNameA(hProcess, hModule, lpImageFileName, lpImageFileName.length);
 		return Native.toString(lpImageFileName);
+	}
+
+	public static boolean EnumProcessModulesEx(Pointer hProcess, WinDef.HMODULE[] lphModule, int cb, IntByReference lpcbNeededs, int flags) {
+		return psapi.EnumProcessModulesEx(hProcess, lphModule, cb, lpcbNeededs, flags);
+	}
+
+	static {
+		Native.register(NativeLibrary.getInstance("Psapi"));
 	}
 
 	private static PsapiStdCall psapi = (PsapiStdCall) Native.loadLibrary("Psapi", PsapiStdCall.class);

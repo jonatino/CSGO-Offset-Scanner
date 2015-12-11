@@ -5,8 +5,8 @@ import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Tlhelp32;
 import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinNT;
-import org.abendigo.natives.Kernel32;
 import org.abendigo.misc.Cacheable;
+import org.abendigo.natives.Kernel32;
 import org.abendigo.natives.Psapi;
 
 import java.nio.ByteBuffer;
@@ -48,24 +48,21 @@ public final class GameProcess {
 		return buffer;
 	}
 
-	public static final int PROCESS_ALL = 0x438;
-
 	public static GameProcess findProcess(String name) {
-		Tlhelp32.PROCESSENTRY32.ByReference processEntry = new Tlhelp32.PROCESSENTRY32.ByReference();
-		while (true) {
-			WinNT.HANDLE snapshot = Kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPALL, 0);
-			try {
-				while (Kernel32.Process32Next(snapshot, processEntry)) {
-					String processName = Native.toString(processEntry.szExeFile);
-					if (name.equals(processName)) {
-						int pid = processEntry.th32ProcessID.intValue();
-						return new GameProcess(pid, Kernel32.OpenProcess(PROCESS_ALL, true, pid));
-					}
+		Tlhelp32.PROCESSENTRY32.ByReference entry = new Tlhelp32.PROCESSENTRY32.ByReference();
+		WinNT.HANDLE snapshot = Kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPALL, 0);
+		try {
+			while (Kernel32.Process32Next(snapshot, entry)) {
+				String processName = Native.toString(entry.szExeFile);
+				if (name.equals(processName)) {
+					int pid = entry.th32ProcessID.intValue();
+					return new GameProcess(pid, Kernel32.OpenProcess(0x438, true, pid));
 				}
-			} finally {
-				Kernel32.CloseHandle(snapshot);
 			}
+		} finally {
+			Kernel32.CloseHandle(snapshot);
 		}
+		throw new IllegalStateException("Process " + name + " was not found. Are you sure its running?");
 	}
 
 }

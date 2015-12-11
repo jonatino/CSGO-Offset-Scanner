@@ -12,10 +12,6 @@ import java.nio.ByteBuffer;
 
 public final class Kernel32 {
 
-	static {
-		Native.register(NativeLibrary.getInstance("Kernel32", W32APIOptions.UNICODE_OPTIONS));
-	}
-
 	public static native WinNT.HANDLE CreateToolhelp32Snapshot(WinDef.DWORD var1, int var2);
 
 	public static native boolean CloseHandle(WinNT.HANDLE var1);
@@ -25,5 +21,9 @@ public final class Kernel32 {
 	public static native boolean Process32Next(WinNT.HANDLE var1, Tlhelp32.PROCESSENTRY32 var2);
 
 	public static native boolean ReadProcessMemory(Pointer process, Pointer address, ByteBuffer memory, int size, int written);
+
+	static {
+		Native.register(NativeLibrary.getInstance("Kernel32", W32APIOptions.UNICODE_OPTIONS));
+	}
 
 }

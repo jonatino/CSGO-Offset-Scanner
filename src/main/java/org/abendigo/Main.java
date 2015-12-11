@@ -11,17 +11,14 @@ public final class Main {
 		long stamp = System.currentTimeMillis();
 
 		GameProcess process = GameProcess.findProcess("csgo.exe");
-
+		
 		Module clientModule = process.findModule("client.dll");
 		Module engineModule = process.findModule("engine.dll");
-
 
 		Offsets.load(clientModule, engineModule);
 		NetVars.load(clientModule, engineModule);
 
 		System.out.println("Took: " + (System.currentTimeMillis() - stamp) + "ms");
-
-
 	}
 
 }
