@@ -9,12 +9,12 @@ public final class Module {
 
 	private final GameProcess process;
 	private final String name;
-	private final int address;
+	private final long address;
 	private final int size;
 	private final Pointer pointer;
 	private ByteBuffer data;
 
-	public Module(GameProcess process, String name, int address, int size) {
+	public Module(GameProcess process, String name, long address, int size) {
 		this.process = process;
 		this.name = name;
 		this.address = address;
@@ -38,7 +38,7 @@ public final class Module {
 		return size;
 	}
 
-	public int address() {
+	public long address() {
 		return address;
 	}
 

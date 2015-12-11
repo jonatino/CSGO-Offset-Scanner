@@ -21,7 +21,6 @@ public final class NetVars {
 		System.out.println(firstclass);
 		firstclass = getAddressForPattern(clientModule, 0x2B, 0, READ, firstclass);
 		System.out.println(firstclass);
-
 		//m_iWeaponID = 12960
 	}
 
