@@ -11,3 +11,9 @@ You can visit our community here: https://abendigo.org
 We use some really cool technology to drive Abendigo. Here's a list:
 
 - [Java Native Access (JNA)](https://github.com/java-native-access/jna) as the backbone for interfacing with native libraries
+
+### Plans
+
+As of right now the project is currently not complete. The following are features I plan on adding:
+ - [NetVars] even though the NetVar addresses rarely change, still would be a nice feature
+ - [txt, xml, JSON output] expect the ability to `dump` the offsets to a file format of your choice.
