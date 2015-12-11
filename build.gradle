@@ -1,0 +1,16 @@
+group 'org.abendigo'
+version '0.1'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'net.java.dev.jna:jna:4.2.1'
+    compile 'net.java.dev.jna:jna-platform:4.2.1'
+}

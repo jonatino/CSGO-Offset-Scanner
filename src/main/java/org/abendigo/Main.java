@@ -15,10 +15,13 @@ public final class Main {
 		Module clientModule = process.findModule("client.dll");
 		Module engineModule = process.findModule("engine.dll");
 
+
 		Offsets.load(clientModule, engineModule);
 		NetVars.load(clientModule, engineModule);
 
 		System.out.println("Took: " + (System.currentTimeMillis() - stamp) + "ms");
+
+
 	}
 
 }
