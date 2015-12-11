@@ -15,5 +15,6 @@ We use some really cool technology to drive Abendigo. Here's a list:
 ### Plans
 
 As of right now the project is currently not complete. The following are features I plan on adding:
- - [NetVars] even though the NetVar addresses rarely change, still would be a nice feature
- - [txt, xml, JSON output] expect the ability to `dump` the offsets to a file format of your choice.
+ - Documentation
+ - NetVars: Even though the NetVar addresses rarely change, still would be a nice feature
+ - txt, xml, JSON: expect the ability to `dump` the offsets to a file format of your choice.
