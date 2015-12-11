@@ -1,13 +1,12 @@
 package org.abendigo.netvars;
 
-import org.abendigo.Main;
 import org.abendigo.process.Module;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.abendigo.process.MemoryUtils.READ;
-import static org.abendigo.process.MemoryUtils.getAddressForPattern;
+import static org.abendigo.process.PatternScanner.READ;
+import static org.abendigo.process.PatternScanner.getAddressForPattern;
 
 
 /**
@@ -28,9 +27,6 @@ public final class NetVars {
 
 	public static NetVar byName(String name) {
 		return netVars.get(name);
-	}
-
-	public static void dump(Main.SavingMode saving_mode) {
 	}
 
 	private class NetVar {

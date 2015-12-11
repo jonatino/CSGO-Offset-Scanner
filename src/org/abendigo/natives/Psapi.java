@@ -15,14 +15,6 @@ import java.util.List;
 
 public interface Psapi extends StdCallLibrary {
 
-	Psapi INSTANCE = (Psapi) Native.loadLibrary("Psapi", Psapi.class);
-
-	boolean EnumProcessModulesEx(Pointer hProcess, WinDef.HMODULE[] lphModule, int cb, IntByReference lpcbNeededs, int flags);
-
-	boolean GetModuleInformation(Pointer hProcess, WinDef.HMODULE hModule, LPMODULEINFO lpmodinfo, int cb);
-
-	int GetModuleBaseNameA(Pointer hProcess, WinDef.HMODULE hModule, byte[] lpImageFileName, int nSize);
-
 	static Module getModule(GameProcess process, String name) {
 		WinDef.HMODULE[] lphModules = new WinDef.HMODULE[1024];
 		IntByReference lpcbNeededs = new IntByReference();
@@ -34,8 +26,6 @@ public interface Psapi extends StdCallLibrary {
 				if (moduleInfo.lpBaseOfDll != null) {
 					String moduleName = Psapi.GetModuleBaseNameA(process.pointer(), hModule);
 					if (name.equals(moduleName)) {
-						/*String baseAddressString = moduleInfo.lpBaseOfDll.toNative().toString();
-						int baseAddress = Integer.parseInt(baseAddressString.substring(baseAddressString.indexOf('x') + 1, baseAddressString.length()), 16);*/
 						int baseAddress = (int) Pointer.nativeValue(moduleInfo.lpBaseOfDll.getPointer());
 						return new Module(process, name, baseAddress, moduleInfo.SizeOfImage);
 					}
@@ -44,6 +34,14 @@ public interface Psapi extends StdCallLibrary {
 		}
 		throw new NullPointerException("Could not find module" + name);
 	}
+
+	Psapi INSTANCE = (Psapi) Native.loadLibrary("Psapi", Psapi.class);
+
+	boolean EnumProcessModulesEx(Pointer hProcess, WinDef.HMODULE[] lphModule, int cb, IntByReference lpcbNeededs, int flags);
+
+	boolean GetModuleInformation(Pointer hProcess, WinDef.HMODULE hModule, LPMODULEINFO lpmodinfo, int cb);
+
+	int GetModuleBaseNameA(Pointer hProcess, WinDef.HMODULE hModule, byte[] lpImageFileName, int nSize);
 
 	static String GetModuleBaseNameA(Pointer hProcess, WinDef.HMODULE hModule) {
 		byte[] lpImageFileName = new byte[256];

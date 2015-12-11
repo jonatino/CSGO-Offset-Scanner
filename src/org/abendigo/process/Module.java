@@ -3,6 +3,8 @@ package org.abendigo.process;
 
 import com.sun.jna.Pointer;
 
+import java.nio.ByteBuffer;
+
 public final class Module {
 
 	private final GameProcess process;
@@ -10,6 +12,7 @@ public final class Module {
 	private final int address;
 	private final int size;
 	private final Pointer pointer;
+	private ByteBuffer data;
 
 	public Module(GameProcess process, String name, int address, int size) {
 		this.process = process;
@@ -37,6 +40,17 @@ public final class Module {
 
 	public int address() {
 		return address;
+	}
+
+	public ByteBuffer data() {
+		return data(false);
+	}
+
+	public ByteBuffer data(boolean forceNew) {
+		if (forceNew || data == null) {
+			data = process().readMemory(pointer(), size());
+		}
+		return data;
 	}
 
 	@Override

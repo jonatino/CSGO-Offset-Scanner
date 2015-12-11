@@ -5,8 +5,8 @@ import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Tlhelp32;
 import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinNT;
-import org.abendigo.natives.Buffers;
 import org.abendigo.natives.Kernel32;
+import org.abendigo.misc.Cacheable;
 import org.abendigo.natives.Psapi;
 
 import java.nio.ByteBuffer;
@@ -37,28 +37,27 @@ public final class GameProcess {
 	}
 
 	public ByteBuffer readMemory(long address, int bytesToRead) {
-		return readMemory(new Pointer(address), bytesToRead);
+		return readMemory(Cacheable.pointer(address), bytesToRead);
 	}
 
 	public ByteBuffer readMemory(Pointer address, int bytesToRead) {
-		ByteBuffer buffer = Buffers.nativeBuffer(bytesToRead);
+		ByteBuffer buffer = Cacheable.buffer(bytesToRead);
 		if (!Kernel32.ReadProcessMemory(pointer(), address, buffer, bytesToRead, 0)) {
 			throw new Win32Exception(Native.getLastError());
 		}
-		buffer.rewind();
 		return buffer;
 	}
 
 	public static final int PROCESS_ALL = 0x438;
 
 	public static GameProcess findProcess(String name) {
+		Tlhelp32.PROCESSENTRY32.ByReference processEntry = new Tlhelp32.PROCESSENTRY32.ByReference();
 		while (true) {
-			Tlhelp32.PROCESSENTRY32.ByReference processEntry = new Tlhelp32.PROCESSENTRY32.ByReference();
 			WinNT.HANDLE snapshot = Kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPALL, 0);
 			try {
 				while (Kernel32.Process32Next(snapshot, processEntry)) {
-					String pName = Native.toString(processEntry.szExeFile);
-					if (name.equals(pName)) {
+					String processName = Native.toString(processEntry.szExeFile);
+					if (name.equals(processName)) {
 						int pid = processEntry.th32ProcessID.intValue();
 						return new GameProcess(pid, Kernel32.OpenProcess(PROCESS_ALL, true, pid));
 					}

@@ -20,8 +20,6 @@ public final class Kernel32 {
 
 	public static native boolean CloseHandle(WinNT.HANDLE var1);
 
-	public static native boolean WriteProcessMemory(Pointer process, Pointer address, byte[] memory, int size, int written);
-
 	public static native WinNT.HANDLE OpenProcess(int desired, boolean inherit, int pid);
 
 	public static native boolean Process32Next(WinNT.HANDLE var1, Tlhelp32.PROCESSENTRY32 var2);
