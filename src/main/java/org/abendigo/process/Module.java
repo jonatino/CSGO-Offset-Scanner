@@ -2,19 +2,20 @@ package org.abendigo.process;
 
 
 import com.sun.jna.Pointer;
+import org.abendigo.natives.NativeProcess;
 
 import java.nio.ByteBuffer;
 
 public final class Module {
 
-	private final GameProcess process;
+	private final NativeProcess process;
 	private final String name;
 	private final long address;
 	private final int size;
 	private final Pointer pointer;
 	private ByteBuffer data;
 
-	public Module(GameProcess process, String name, long address, int size) {
+	public Module(NativeProcess process, String name, long address, int size) {
 		this.process = process;
 		this.name = name;
 		this.address = address;
@@ -22,7 +23,7 @@ public final class Module {
 		this.pointer = new Pointer(address);
 	}
 
-	public GameProcess process() {
+	public NativeProcess process() {
 		return process;
 	}
 

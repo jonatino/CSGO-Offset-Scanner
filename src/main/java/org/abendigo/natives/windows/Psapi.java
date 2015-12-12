@@ -1,4 +1,4 @@
-package org.abendigo.natives;
+package org.abendigo.natives.windows;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
@@ -8,7 +8,7 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.win32.StdCallLibrary;
-import org.abendigo.process.GameProcess;
+import org.abendigo.process.WindowsProcess;
 import org.abendigo.process.Module;
 
 import java.util.Arrays;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public final class Psapi {
 
-	public static Module getModule(GameProcess process, String name) {
+	public static Module getModule(WindowsProcess process, String name) {
 		WinDef.HMODULE[] lphModules = new WinDef.HMODULE[1024];
 		IntByReference lpcbNeededs = new IntByReference();
 		PsapiStdCall.LPMODULEINFO moduleInfo = new PsapiStdCall.LPMODULEINFO();

@@ -1,8 +1,9 @@
 package org.abendigo;
 
+import org.abendigo.natives.NativeProcess;
 import org.abendigo.netvars.NetVars;
 import org.abendigo.offsets.Offsets;
-import org.abendigo.process.GameProcess;
+import org.abendigo.process.WindowsProcess;
 import org.abendigo.process.Module;
 
 public final class Main {
@@ -10,7 +11,7 @@ public final class Main {
 	public static void main(String[] args) {
 		long stamp = System.currentTimeMillis();
 
-		GameProcess process = GameProcess.findProcess("csgo.exe");
+		NativeProcess process = NativeProcess.findProcess("csgo.exe");
 		
 		Module clientModule = process.findModule("client.dll");
 		Module engineModule = process.findModule("engine.dll");
