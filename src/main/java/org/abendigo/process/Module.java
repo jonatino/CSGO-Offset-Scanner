@@ -2,7 +2,6 @@ package org.abendigo.process;
 
 
 import com.sun.jna.Pointer;
-import org.abendigo.natives.NativeProcess;
 
 import java.nio.ByteBuffer;
 
@@ -52,29 +51,6 @@ public final class Module {
 			data = process().readMemory(pointer(), size());
 		}
 		return data;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (!(o instanceof Module)) {
-			return false;
-		}
-
-		Module module = (Module) o;
-
-		if (address != module.address) {
-			return false;
-		}
-		if (size != module.size) {
-			return false;
-		}
-		if (name != null ? !name.equals(module.name) : module.name != null) {
-			return false;
-		}
-		return pointer.equals(module.pointer);
 	}
 
 }

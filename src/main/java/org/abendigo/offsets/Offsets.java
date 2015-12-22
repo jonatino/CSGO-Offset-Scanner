@@ -2,7 +2,7 @@ package org.abendigo.offsets;
 
 import org.abendigo.process.Module;
 
-import static org.abendigo.process.PatternScanner.*;
+import static org.abendigo.misc.PatternScanner.*;
 
 /**
  * Created by Jonathan on 11/13/2015.

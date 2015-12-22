@@ -1,25 +1,24 @@
 package org.abendigo;
 
-import org.abendigo.natives.NativeProcess;
+import org.abendigo.process.NativeProcess;
 import org.abendigo.netvars.NetVars;
 import org.abendigo.offsets.Offsets;
-import org.abendigo.process.WindowsProcess;
 import org.abendigo.process.Module;
 
 public final class Main {
 
-	public static void main(String[] args) {
-		long stamp = System.currentTimeMillis();
+	public static NativeProcess csgo;
 
-		NativeProcess process = NativeProcess.findProcess("csgo.exe");
-		
-		Module clientModule = process.findModule("client.dll");
-		Module engineModule = process.findModule("engine.dll");
+	public static void main(String[] args) {
+		csgo = NativeProcess.byName("csgo.exe");
+
+		Module clientModule = csgo.findModule("client.dll");
+		Module engineModule = csgo.findModule("engine.dll");
 
 		Offsets.load(clientModule, engineModule);
 		NetVars.load(clientModule, engineModule);
 
-		System.out.println("Took: " + (System.currentTimeMillis() - stamp) + "ms");
+		NetVars.dump();
 	}
 
 }

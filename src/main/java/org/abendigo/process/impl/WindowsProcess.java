@@ -1,4 +1,4 @@
-package org.abendigo.process;
+package org.abendigo.process.impl;
 
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -6,8 +6,9 @@ import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinNT;
 import org.abendigo.misc.Cacheable;
 import org.abendigo.natives.windows.Kernel32;
-import org.abendigo.natives.NativeProcess;
+import org.abendigo.process.NativeProcess;
 import org.abendigo.natives.windows.Psapi;
+import org.abendigo.process.Module;
 
 import java.nio.ByteBuffer;
 

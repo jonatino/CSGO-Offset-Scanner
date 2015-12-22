@@ -2,6 +2,7 @@ group 'org.abendigo'
 version '0.1'
 
 apply plugin: 'java'
+apply plugin: 'kotlin'
 
 sourceCompatibility = 1.8
 
@@ -11,6 +12,19 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'net.java.dev.jna:jna:4.2.1'
     compile 'net.java.dev.jna:jna-platform:4.2.1'
+    compile 'commons-configuration:commons-configuration:1.10'
+}
+
+buildscript {
+    ext.kotlin_version = '1.0.0-beta-1038'
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }

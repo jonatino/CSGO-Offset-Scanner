@@ -8,7 +8,7 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.win32.StdCallLibrary;
-import org.abendigo.process.WindowsProcess;
+import org.abendigo.process.impl.WindowsProcess;
 import org.abendigo.process.Module;
 
 import java.util.Arrays;

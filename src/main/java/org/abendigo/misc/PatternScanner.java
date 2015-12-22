@@ -1,11 +1,10 @@
-package org.abendigo.process;
+package org.abendigo.misc;
+
+import org.abendigo.process.Module;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-/**
- * Created by Jonathan on 11/15/2015.
- */
 public final class PatternScanner {
 
 	public static final int READ = 1, SUBTRACT = 2;
@@ -41,7 +40,7 @@ public final class PatternScanner {
 
 	private static boolean checkMask(ByteBuffer data, int offset, byte[] pMask) {
 		for (int i = 0; i < pMask.length; i++) {
-			if (pMask[i] != 0x00 && (pMask[i] != data.get(offset + i))) {
+			if (pMask[i] != 0x0 && (pMask[i] != data.get(offset + i))) {
 				return false;
 			}
 		}
