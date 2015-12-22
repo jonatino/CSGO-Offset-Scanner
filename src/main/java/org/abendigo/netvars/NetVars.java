@@ -1,5 +1,6 @@
 package org.abendigo.netvars;
 
+import org.abendigo.misc.Strings;
 import org.abendigo.netvars.impl.ClientClass;
 import org.abendigo.netvars.impl.RecvProp;
 import org.abendigo.netvars.impl.RecvTable;
@@ -20,7 +21,7 @@ import static org.abendigo.misc.PatternScanner.getAddressForPattern;
  */
 public final class NetVars {
 
-	private static final List<NetVar> netVars = new ArrayList<>();
+	private static final List<NetVar> netVars = new ArrayList<>(16_500);
 
 	public static void load(Module clientModule) {
 		int firstclass = getAddressForPattern(clientModule, 0, 0, 0, "DT_TEWorldDecal");
@@ -63,6 +64,7 @@ public final class NetVars {
 			if (child == 0) {
 				continue;
 			}
+
 			scanTable(new RecvTable(child), prop.offset(), name);
 		}
 	}
@@ -90,7 +92,7 @@ public final class NetVars {
 
 		@Override
 		public String toString() {
-			return className + " " + varName + " = " + "0x" + Integer.toHexString(offset).toUpperCase();
+			return className + " " + varName + " = " + Strings.hex(offset);
 		}
 
 	}
