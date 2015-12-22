@@ -1,5 +1,6 @@
 package org.abendigo;
 
+import org.abendigo.netvars.NetVars;
 import org.abendigo.offsets.Offsets;
 
 /**
@@ -10,9 +11,8 @@ public final class Main {
 	public static void main(String... args) {
 		OffsetManager.initAll();
 
-		//0xc554
-		//0x0000C550
-		System.out.println(Offsets.m_iCrossHairID);
+		NetVars.dump();
+		Offsets.dump();
 	}
 
 }
