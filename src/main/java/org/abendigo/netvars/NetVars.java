@@ -1,12 +1,18 @@
 package org.abendigo.netvars;
 
+import org.abendigo.netvars.impl.ClientClass;
+import org.abendigo.netvars.impl.RecvProp;
+import org.abendigo.netvars.impl.RecvTable;
 import org.abendigo.process.Module;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.abendigo.process.PatternScanner.READ;
-import static org.abendigo.process.PatternScanner.getAddressForPattern;
+import static org.abendigo.misc.PatternScanner.READ;
+import static org.abendigo.misc.PatternScanner.getAddressForPattern;
 
 
 /**
@@ -14,46 +20,85 @@ import static org.abendigo.process.PatternScanner.getAddressForPattern;
  */
 public final class NetVars {
 
-	private static final Map<String, NetVar> netVars = new HashMap<>();
+	private static final List<NetVar> netVars = new ArrayList<>();
 
 	public static void load(Module clientModule, Module engineModule) {
 		int firstclass = getAddressForPattern(clientModule, 0, 0, 0, "DT_TEWorldDecal");
-		System.out.println(firstclass);
 		firstclass = getAddressForPattern(clientModule, 0x2B, 0, READ, firstclass);
-		System.out.println(firstclass);
-		//m_iWeaponID = 12960
+
+		for (ClientClass clientClass = new ClientClass(firstclass); clientClass.readable(); clientClass = new ClientClass(clientClass.next())) {
+			RecvTable table = new RecvTable(clientClass.table());
+			if (!table.readable()) {
+				continue;
+			}
+			ScanTable(table, 0, table.tableName());
+		}
 	}
 
-	public static NetVar byName(String name) {
-		return netVars.get(name);
+	public static void dump() {
+		List<String> text = new ArrayList<>();
+		netVars.forEach(n -> text.add(n.toString()));
+		try {
+			Files.write(Paths.get("NetVars.txt"), text);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private class NetVar {
+	private static void ScanTable(RecvTable table, int offset, String name) {
+		int count = table.propCount();
+		for (int i = 0; i < count; ++i) {
+			RecvProp prop = new RecvProp(table.propForId(i), offset);
+			String propName = prop.propName();
 
-		private final int baseAddress;
-		private final String name;
-		private final Map<String, Integer> childVars;
+			if (Character.isDigit(propName.charAt(0))) {
+				continue;
+			}
 
-		private NetVar(int baseAddress, String name, Map<String, Integer> childVars) {
-			this.baseAddress = baseAddress;
-			this.name = name;
-			this.childVars = childVars;
+			boolean isBaseClass = propName.contains("baseclass");
+			if (!isBaseClass) {
+				netVars.add(new NetVar(name, propName, prop.offset()));
+			}
+
+			int child = prop.table();
+			if (child == 0) {
+				continue;
+			}
+
+			RecvTable recvTable = new RecvTable(child);
+			if (isBaseClass) {
+				netVars.add(new NetVar(name, recvTable.tableName(), prop.offset()));
+			}
+			ScanTable(recvTable, prop.offset(), name);
+		}
+	}
+
+	public static int byName(String className, String varname) {
+		for (NetVar var : netVars) {
+			if (var.className.equals(className)) {
+				if (var.varName.equals(varname)) {
+					return var.offset;
+				}
+			}
+		}
+		throw new RuntimeException("NetVar [" + className + ", " + varname + " not found!]");
+	}
+
+	private static class NetVar {
+
+		private final String className;
+		private final String varName;
+		private final int offset;
+
+		private NetVar(String className, String varName, int offset) {
+			this.className = className;
+			this.varName = varName;
+			this.offset = offset;
 		}
 
-		public int baseAddress() {
-			return baseAddress;
-		}
-
-		public String name() {
-			return name;
-		}
-
-		public int getChild(String name) {
-			return childVars.getOrDefault(name, -1);
-		}
-
-		public Map<String, Integer> getChildren() {
-			return childVars;
+		@Override
+		public String toString() {
+			return className + " " + varName + " = " + "0x" + Integer.toHexString(offset).toUpperCase();
 		}
 
 	}
