@@ -10,6 +10,8 @@ public final class Main {
 	public static NativeProcess csgo;
 
 	public static void main(String[] args) {
+		long stamp = System.currentTimeMillis();
+
 		csgo = NativeProcess.byName("csgo.exe");
 
 		Module clientModule = csgo.findModule("client.dll");
@@ -19,6 +21,8 @@ public final class Main {
 		NetVars.load(clientModule, engineModule);
 
 		NetVars.dump();
+
+		System.out.println("Took: " + (System.currentTimeMillis() - stamp) + "ms");
 	}
 
 }
