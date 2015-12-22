@@ -1,6 +1,14 @@
 package org.abendigo.offsets;
 
+import org.abendigo.misc.Strings;
 import org.abendigo.process.Module;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.abendigo.misc.PatternScanner.*;
 import static org.abendigo.netvars.NetVars.byName;
@@ -113,9 +121,9 @@ public final class Offsets {
 		m_vecOrigin = byName("DT_BaseEntity", "m_vecOrigin");
 		m_iTeamNum = byName("DT_BaseEntity", "m_iTeamNum");
 
-		m_vecPunch = byName("DT_BasePlayer", "m_Local") + 0x70;
+		m_vecPunch = byName("DT_BasePlayer", "m_aimPunchAngle");
 
-		m_iWeaponID = byName("DT_WeaponCSBase", "m_fAccuracyPenalty") + 0x24;
+		m_iWeaponID = byName("DT_WeaponCSBase", "m_fAccuracyPenalty") + 0x2C;
 
 		m_dwBoneMatrix = byName("DT_BaseAnimating", "m_nForceBone") + 0x1C;
 
@@ -124,6 +132,29 @@ public final class Offsets {
 		m_dwModel = 0x6C;
 		m_dwIndex = 0x64;
 		m_bDormant = 0xE9;
+	}
+
+	public static void dump() {
+		List<String> text = new ArrayList<>();
+		for (Field field : Offsets.class.getFields()) {
+			text.add(field.getName() + " -> " + Strings.hex(getValue(field)));
+		}
+		try {
+			Files.write(Paths.get("Offsets.txt"), text);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	private static int getValue(Field field) {
+		try {
+			field.setAccessible(true);
+			return (int) field.get(Offsets.class);
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
+		return -1;
 	}
 
 }
