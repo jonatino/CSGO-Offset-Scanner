@@ -119,7 +119,7 @@ public final class Offsets {
 
 		m_dwBoneMatrix = byName("DT_BaseAnimating", "m_nForceBone") + 0x1C;
 
-		m_iCrossHairID = byName("DT_CSPlayer", "m_bHasDefuser") + 0x4c;
+		m_iCrossHairID = byName("DT_CSPlayer", "m_bHasDefuser") + 0x4C;
 
 		m_dwModel = 0x6C;
 		m_dwIndex = 0x64;
