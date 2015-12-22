@@ -1,5 +1,7 @@
 package org.abendigo.netvars.impl;
 
+import org.abendigo.misc.Strings;
+
 import static org.abendigo.Main.csgo;
 
 
@@ -23,12 +25,7 @@ public final class RecvProp {
 	public String propName() {
 		byte[] bytes = new byte[64];
 		csgo.readMemory(csgo.readMemory(base, 4).getInt(), bytes.length).get(bytes);
-		for (int i = 0; i < bytes.length; i++) {
-			if (bytes[i] == 0) {
-				bytes[i] = 0x20;
-			}
-		}
-		return new String(bytes).split(" ")[0].trim();
+		return Strings.transform(bytes);
 	}
 
 	public int offset() {

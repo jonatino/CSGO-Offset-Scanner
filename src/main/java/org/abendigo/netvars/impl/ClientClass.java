@@ -19,12 +19,6 @@ public final class ClientClass {
 		return csgo.readMemory(base + 0x14, 4).getInt();
 	}
 
-	public String classNameA() {
-		byte[] bytes = new byte[64];
-		csgo.readMemory(csgo.readMemory(base + 0x8, 4).getInt(), bytes.length).get(bytes);
-		return new String(bytes).split(" ")[0].trim();
-	}
-
 	public int next() {
 		return csgo.readMemory(base + 0x10, 4).getInt();
 	}

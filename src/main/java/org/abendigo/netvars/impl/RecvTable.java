@@ -1,5 +1,7 @@
 package org.abendigo.netvars.impl;
 
+import org.abendigo.misc.Strings;
+
 import static org.abendigo.Main.csgo;
 
 /**
@@ -22,20 +24,7 @@ public final class RecvTable {
 	public String tableName() {
 		byte[] bytes = new byte[32];
 		csgo.readMemory(csgo.readMemory(base + 0xC, 4).getInt(), bytes.length).get(bytes);
-		for (int i = 0; i < bytes.length; i++) {
-			if (bytes[i] == 0) {
-				bytes[i] = 32;
-			}
-		}
-		return new String(bytes).split(" ")[0].trim();
-	}
-
-	public String classNameA() {
-	/*	auto toReturn = GetTableName();
-		toReturn.replace( toReturn.begin(), toReturn.begin() + 3, "C" );
-		return toReturn;*/
-
-		return "";
+		return Strings.transform(bytes);
 	}
 
 	public int propCount() {
