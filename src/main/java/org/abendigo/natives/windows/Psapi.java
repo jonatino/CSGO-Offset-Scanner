@@ -67,7 +67,7 @@ public final class Psapi {
 			public WinNT.HANDLE EntryPoint;
 
 			@Override
-			protected List getFieldOrder() {
+			protected List<String> getFieldOrder() {
 				return Arrays.asList("lpBaseOfDll", "SizeOfImage", "EntryPoint");
 			}
 		}
