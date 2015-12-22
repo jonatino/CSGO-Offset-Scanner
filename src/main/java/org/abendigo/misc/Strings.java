@@ -14,4 +14,8 @@ public final class Strings {
 		return new String(bytes).split(" ")[0].trim();
 	}
 
+	public static String hex(int value) {
+		return "0x" + Integer.toHexString(value).toUpperCase();
+	}
+
 }
