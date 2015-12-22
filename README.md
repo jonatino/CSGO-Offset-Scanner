@@ -19,3 +19,4 @@ We use some really cool technology to drive Abendigo. Here's a list:
 As of right now the project is currently not complete. The following are features I plan on adding:
  - Documentation
  - txt, xml, JSON: expect the ability to `dump` the offsets to a file format of your choice.
+ - Support for Mac OSX, and other Unix based operating systems
