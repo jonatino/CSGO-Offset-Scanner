@@ -5,6 +5,5 @@ build/
 gradle/
 gradlew
 gradlew.bat
-NetVars.txt
 Offset Scanner.jar
 *.MF
