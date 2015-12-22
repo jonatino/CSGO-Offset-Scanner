@@ -3,6 +3,7 @@ package org.abendigo.offsets;
 import org.abendigo.process.Module;
 
 import static org.abendigo.misc.PatternScanner.*;
+import static org.abendigo.netvars.NetVars.byName;
 
 /**
  * Created by Jonathan on 11/13/2015.
@@ -36,6 +37,32 @@ public final class Offsets {
 	public static int m_dwViewAngles;
 	public static int m_dwEnginePosition;
 
+	public static int m_flFlashMaxAlpha;
+	public static int m_bCanReload;
+	public static int m_dwLocalPlayerIndex;
+	public static int m_iTeamNum;
+	public static int m_bDormant;
+	public static int m_iCrossHairID;
+	public static int m_iShotsFired;
+	public static int m_dwBoneMatrix;
+	public static int m_vecVelocity;
+	public static int m_vecPunch;
+	public static int m_lifeState;
+	public static int m_dwModel;
+	public static int m_dwIndex;
+	public static int m_vecViewOffset;
+	public static int m_bIsScoped;
+	public static int m_bSpotted;
+	public static int m_hActiveWeapon;
+	public static int m_iWeaponID;
+	public static int m_fFlags;
+	public static int m_iHealth;
+	public static int m_flNextPrimaryAttack;
+	public static int m_nTickBase;
+	public static int m_vecOrigin;
+	public static int m_iClip1;
+	public static int m_iClip2;
+
 	public static void load(Module client, Module engine) {
 		/**
 		 * Client.dll offsets
@@ -50,6 +77,7 @@ public final class Offsets {
 		m_dwViewMatrix = getAddressForPattern(client, 0x33C, 0xB0, READ | SUBTRACT, 0x81, 0xC6, 0x00, 0x00, 0x00, 0x00, 0x88, 0x45, 0x92, 0x0F, 0xB6, 0xC0);
 		m_dwEntityList = getAddressForPattern(client, 0x1, 0x0, READ | SUBTRACT, 0xBB, 0x00, 0x00, 0x00, 0x00, 0x83, 0xFF, 0x01, 0x0F, 0x8C, 0x00, 0x00, 0x00, 0x00, 0x3B, 0xF8);
 		m_dwLocalPlayer = getAddressForPattern(client, 0x1, 0x10, READ | SUBTRACT, 0xA3, 0x00, 0x00, 0x00, 0x00, 0xC7, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xE8, 0x00, 0x00, 0x00, 0x00, 0x59, 0xC3, 0x6A, 0x00);
+		m_bCanReload = getAddressForPattern(client, 0x2, 0x0, READ, 0x80, 0xB9, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0F, 0x85, 0x0, 0x0, 0x0, 0x0, 0xA1);
 
 		/**
 		 * Engine.dll offsets
@@ -63,6 +91,39 @@ public final class Offsets {
 		m_dwPlayerInfo = getAddressForPattern(engine, 0x2, 0x0, READ, 0x8B, 0x88, 0x00, 0x00, 0x00, 0x00, 0x8B, 0x01, 0x8B, 0x40, 0x00, 0xFF, 0xD0, 0x8B, 0xF8);
 		m_dwViewAngles = getAddressForPattern(engine, 0x4, 0x0, READ, 0xF3, 0x0F, 0x11, 0x80, 0x00, 0x00, 0x00, 0x00, 0xD9, 0x46, 0x04, 0xD9, 0x05, 0x00, 0x00, 0x00, 0x00);
 		m_dwEnginePosition = getAddressForPattern(engine, 0x4, 0x0, READ | SUBTRACT, 0xF3, 0x0F, 0x11, 0x15, 0x00, 0x00, 0x00, 0x00, 0xF3, 0x0F, 0x11, 0x0D, 0x00, 0x00, 0x00, 0x00, 0xF3, 0x0F, 0x11, 0x05, 0x00, 0x00, 0x00, 0x00, 0xF3, 0x0F, 0x11, 0x3D, 0x00, 0x00, 0x00, 0x00);
+		m_dwLocalPlayerIndex = getAddressForPattern(engine, 0x2, 0x0, READ, 0x8B, 0x80, 0x00, 0x00, 0x00, 0x00, 0x40, 0xC3);
+
+		m_fFlags = byName("DT_BasePlayer", "m_fFlags");
+		m_iHealth = byName("DT_BasePlayer", "m_iHealth");
+		m_vecViewOffset = byName("DT_BasePlayer", "m_vecViewOffset[0]");
+		m_hActiveWeapon = byName("DT_BasePlayer", "m_hActiveWeapon");
+		m_nTickBase = byName("DT_BasePlayer", "m_nTickBase");
+		m_vecVelocity = byName("DT_BasePlayer", "m_vecVelocity[0]");
+		m_lifeState = byName("DT_BasePlayer", "m_lifeState");
+
+		m_flFlashMaxAlpha = byName("DT_CSPlayer", "m_flFlashMaxAlpha");
+		m_iShotsFired = byName("DT_CSPlayer", "m_iShotsFired");
+		m_bIsScoped = byName("DT_CSPlayer", "m_bIsScoped");
+
+		m_flNextPrimaryAttack = byName("DT_BaseCombatWeapon", "m_flNextPrimaryAttack");
+		m_iClip1 = byName("DT_BaseCombatWeapon", "m_iClip1");
+		m_iClip2 = byName("DT_BaseCombatWeapon", "m_iClip2");
+
+		m_bSpotted = byName("DT_BaseEntity", "m_bSpotted");
+		m_vecOrigin = byName("DT_BaseEntity", "m_vecOrigin");
+		m_iTeamNum = byName("DT_BaseEntity", "m_iTeamNum");
+
+		m_vecPunch = byName("DT_BasePlayer", "m_Local") + 0x70;
+
+		m_iWeaponID = byName("DT_WeaponCSBase", "m_fAccuracyPenalty") + 0x24;
+
+		m_dwBoneMatrix = byName("DT_BaseAnimating", "m_nForceBone") + 0x1C;
+
+		m_iCrossHairID = byName("DT_CSPlayer", "m_bHasDefuser") + 0x4c;
+
+		m_dwModel = 0x6C;
+		m_dwIndex = 0x64;
+		m_bDormant = 0xE9;
 	}
 
 }
