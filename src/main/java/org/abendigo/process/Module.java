@@ -48,7 +48,7 @@ public final class Module {
 
 	public ByteBuffer data(boolean forceNew) {
 		if (forceNew || data == null) {
-			data = process().readMemory(pointer(), size());
+			data = process().read(pointer(), size());
 		}
 		return data;
 	}

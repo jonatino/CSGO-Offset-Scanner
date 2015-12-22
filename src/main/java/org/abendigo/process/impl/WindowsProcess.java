@@ -41,12 +41,12 @@ public final class WindowsProcess implements NativeProcess {
 	}
 
 	@Override
-	public ByteBuffer readMemory(long address, int bytesToRead) {
-		return readMemory(Cacheable.pointer(address), bytesToRead);
+	public ByteBuffer read(long address, int bytesToRead) {
+		return read(Cacheable.pointer(address), bytesToRead);
 	}
 
 	@Override
-	public ByteBuffer readMemory(Pointer address, int bytesToRead) {
+	public ByteBuffer read(Pointer address, int bytesToRead) {
 		ByteBuffer buffer = Cacheable.buffer(bytesToRead);
 		if (!Kernel32.ReadProcessMemory(pointer(), address, buffer, bytesToRead, 0)) {
 			throw new Win32Exception(Native.getLastError());

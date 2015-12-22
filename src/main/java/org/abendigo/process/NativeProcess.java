@@ -22,11 +22,11 @@ public interface NativeProcess {
 
 	Module findModule(String moduleName);
 
-	default ByteBuffer readMemory(long address, int bytesToRead) {
-		return readMemory(Cacheable.pointer(address), bytesToRead);
+	default ByteBuffer read(long address, int bytesToRead) {
+		return read(Cacheable.pointer(address), bytesToRead);
 	}
 
-	ByteBuffer readMemory(Pointer address, int bytesToRead);
+	ByteBuffer read(Pointer address, int bytesToRead);
 
 	static NativeProcess byName(String name) {
 		String os = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);

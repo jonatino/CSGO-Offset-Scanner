@@ -27,7 +27,7 @@ public final class PatternScanner {
 			if (checkMask(module.data(), i, values)) {
 				i += module.address() + pattern_offset;
 				if ((flags & READ) == READ) {
-					i = module.process().readMemory(i, 4).getInt();
+					i = module.process().read(i, 4).getInt();
 				}
 				if ((flags & SUBTRACT) == SUBTRACT) {
 					i -= module.address();

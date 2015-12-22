@@ -22,7 +22,7 @@ public final class NetVars {
 
 	private static final List<NetVar> netVars = new ArrayList<>();
 
-	public static void load(Module clientModule, Module engineModule) {
+	public static void load(Module clientModule) {
 		int firstclass = getAddressForPattern(clientModule, 0, 0, 0, "DT_TEWorldDecal");
 		firstclass = getAddressForPattern(clientModule, 0x2B, 0, READ, firstclass);
 
@@ -31,7 +31,7 @@ public final class NetVars {
 			if (!table.readable()) {
 				continue;
 			}
-			ScanTable(table, 0, table.tableName());
+			scanTable(table, 0, table.tableName());
 		}
 	}
 
@@ -45,43 +45,35 @@ public final class NetVars {
 		}
 	}
 
-	private static void ScanTable(RecvTable table, int offset, String name) {
+	private static void scanTable(RecvTable table, int offset, String name) {
 		int count = table.propCount();
-		for (int i = 0; i < count; ++i) {
+		for (int i = 0; i < count; i++) {
 			RecvProp prop = new RecvProp(table.propForId(i), offset);
-			String propName = prop.propName();
 
-			if (Character.isDigit(propName.charAt(0))) {
+			if (Character.isDigit(prop.name().charAt(0))) {
 				continue;
 			}
 
-			boolean isBaseClass = propName.contains("baseclass");
+			boolean isBaseClass = prop.name().contains("baseclass");
 			if (!isBaseClass) {
-				netVars.add(new NetVar(name, propName, prop.offset()));
+				netVars.add(new NetVar(name, prop.name(), prop.offset()));
 			}
 
 			int child = prop.table();
 			if (child == 0) {
 				continue;
 			}
-
-			RecvTable recvTable = new RecvTable(child);
-			if (isBaseClass) {
-				netVars.add(new NetVar(name, recvTable.tableName(), prop.offset()));
-			}
-			ScanTable(recvTable, prop.offset(), name);
+			scanTable(new RecvTable(child), prop.offset(), name);
 		}
 	}
 
 	public static int byName(String className, String varname) {
 		for (NetVar var : netVars) {
-			if (var.className.equals(className)) {
-				if (var.varName.equals(varname)) {
-					return var.offset;
-				}
+			if (var.className.equals(className) && var.varName.equals(varname)) {
+				return var.offset;
 			}
 		}
-		throw new RuntimeException("NetVar [" + className + ", " + varname + " not found!]");
+		throw new RuntimeException("NetVar [" + className + ", " + varname + "] not found!");
 	}
 
 	private static class NetVar {
