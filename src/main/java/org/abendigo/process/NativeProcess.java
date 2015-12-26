@@ -3,7 +3,6 @@ package org.abendigo.process;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Tlhelp32;
-import com.sun.jna.platform.win32.WinNT;
 import org.abendigo.misc.Cacheable;
 import org.abendigo.natives.windows.Kernel32;
 import org.abendigo.process.impl.WindowsProcess;
@@ -32,7 +31,7 @@ public interface NativeProcess {
 		String os = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
 		if (os.contains("win")) {
 			Tlhelp32.PROCESSENTRY32.ByReference entry = new Tlhelp32.PROCESSENTRY32.ByReference();
-			WinNT.HANDLE snapshot = Kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPALL, 0);
+			Pointer snapshot = Kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPALL, 0);
 			try {
 				while (Kernel32.Process32Next(snapshot, entry)) {
 					String processName = Native.toString(entry.szExeFile);

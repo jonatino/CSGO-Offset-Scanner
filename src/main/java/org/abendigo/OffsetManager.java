@@ -26,11 +26,11 @@ public final class OffsetManager {
 	}
 
 	public static void loadNetVars() {
-		NetVars.load(clientModule);
+		NetVars.load();
 	}
 
 	public static void loadOffsets() {
-		Offsets.load(clientModule, engineModule);
+		Offsets.load();
 	}
 
 }

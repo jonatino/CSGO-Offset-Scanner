@@ -4,7 +4,6 @@ import org.abendigo.misc.Strings;
 import org.abendigo.netvars.impl.ClientClass;
 import org.abendigo.netvars.impl.RecvProp;
 import org.abendigo.netvars.impl.RecvTable;
-import org.abendigo.process.Module;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.abendigo.OffsetManager.clientModule;
 import static org.abendigo.misc.PatternScanner.READ;
 import static org.abendigo.misc.PatternScanner.getAddressForPattern;
 
@@ -23,7 +23,7 @@ public final class NetVars {
 
 	private static final List<NetVar> netVars = new ArrayList<>(16_500);
 
-	public static void load(Module clientModule) {
+	public static void load() {
 		int firstclass = getAddressForPattern(clientModule, 0, 0, 0, "DT_TEWorldDecal");
 		firstclass = getAddressForPattern(clientModule, 0x2B, 0, READ, firstclass);
 

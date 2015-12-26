@@ -3,7 +3,6 @@ package org.abendigo.process.impl;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Win32Exception;
-import com.sun.jna.platform.win32.WinNT;
 import org.abendigo.misc.Cacheable;
 import org.abendigo.natives.windows.Kernel32;
 import org.abendigo.natives.windows.Psapi;
@@ -11,6 +10,7 @@ import org.abendigo.process.Module;
 import org.abendigo.process.NativeProcess;
 
 import java.nio.ByteBuffer;
+import java.util.Map;
 
 /**
  * Created by Jonathan on 11/13/2015.
@@ -18,9 +18,10 @@ import java.nio.ByteBuffer;
 public final class WindowsProcess implements NativeProcess {
 
 	private final int id;
-	private final WinNT.HANDLE handle;
+	private final Pointer handle;
+	private Map<String, Module> modules;
 
-	public WindowsProcess(int id, WinNT.HANDLE handle) {
+	public WindowsProcess(int id, Pointer handle) {
 		this.id = id;
 		this.handle = handle;
 	}
@@ -32,12 +33,15 @@ public final class WindowsProcess implements NativeProcess {
 
 	@Override
 	public Pointer pointer() {
-		return handle.getPointer();
+		return handle;
 	}
 
 	@Override
 	public Module findModule(String moduleName) {
-		return Psapi.getModule(this, moduleName);
+		if (modules == null) {
+			modules = Psapi.getModules(this);
+		}
+		return modules.get(moduleName);
 	}
 
 	@Override
