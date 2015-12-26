@@ -149,7 +149,6 @@ public final class Offsets {
 
 	private static int getValue(Field field) {
 		try {
-			field.setAccessible(true);
 			return (int) field.get(Offsets.class);
 		} catch (Throwable t) {
 			t.printStackTrace();
