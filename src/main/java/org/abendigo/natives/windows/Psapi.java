@@ -12,11 +12,15 @@ import org.abendigo.process.Module;
 import org.abendigo.process.impl.WindowsProcess;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public final class Psapi {
 
-	public static Module getModule(WindowsProcess process, String name) {
+	public static Map<String, Module> getModules(WindowsProcess process) {
+		Map<String, Module> modules = new HashMap<>();
+
 		WinDef.HMODULE[] lphModules = new WinDef.HMODULE[1024];
 		IntByReference lpcbNeededs = new IntByReference();
 		PsapiStdCall.LPMODULEINFO moduleInfo = new PsapiStdCall.LPMODULEINFO();
@@ -27,13 +31,11 @@ public final class Psapi {
 			if (GetModuleInformation(process.pointer(), hModule, moduleInfo, moduleInfo.size())) {
 				if (moduleInfo.lpBaseOfDll != null) {
 					String moduleName = GetModuleBaseNameA(process.pointer(), hModule);
-					if (name.equals(moduleName)) {
-						return new Module(process, name, Pointer.nativeValue(hModule.getPointer()), moduleInfo.SizeOfImage);
-					}
+					modules.put(moduleName, new Module(process, moduleName, hModule.getPointer(), moduleInfo.SizeOfImage));
 				}
 			}
 		}
-		throw new NullPointerException("Could not find module " + name);
+		return modules;
 	}
 
 	public static native boolean GetModuleInformation(Pointer hProcess, WinDef.HMODULE hModule, PsapiStdCall.LPMODULEINFO lpmodinfo, int cb);

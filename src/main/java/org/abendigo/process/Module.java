@@ -14,12 +14,12 @@ public final class Module {
 	private final Pointer pointer;
 	private ByteBuffer data;
 
-	public Module(NativeProcess process, String name, long address, int size) {
+	public Module(NativeProcess process, String name, Pointer pointer, int size) {
 		this.process = process;
 		this.name = name;
-		this.address = address;
+		this.address = Pointer.nativeValue(pointer);
 		this.size = size;
-		this.pointer = new Pointer(address);
+		this.pointer = pointer;
 	}
 
 	public NativeProcess process() {
