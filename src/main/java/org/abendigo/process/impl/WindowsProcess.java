@@ -6,9 +6,9 @@ import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinNT;
 import org.abendigo.misc.Cacheable;
 import org.abendigo.natives.windows.Kernel32;
-import org.abendigo.process.NativeProcess;
 import org.abendigo.natives.windows.Psapi;
 import org.abendigo.process.Module;
+import org.abendigo.process.NativeProcess;
 
 import java.nio.ByteBuffer;
 
@@ -38,11 +38,6 @@ public final class WindowsProcess implements NativeProcess {
 	@Override
 	public Module findModule(String moduleName) {
 		return Psapi.getModule(this, moduleName);
-	}
-
-	@Override
-	public ByteBuffer read(long address, int bytesToRead) {
-		return read(Cacheable.pointer(address), bytesToRead);
 	}
 
 	@Override
