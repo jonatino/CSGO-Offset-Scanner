@@ -35,5 +35,5 @@ public final class Cacheable {
 		Pointer.nativeValue(cachedPointer, address);
 		return cachedPointer;
 	}
-	
+
 }
