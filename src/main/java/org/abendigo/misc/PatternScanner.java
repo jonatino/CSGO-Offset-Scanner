@@ -2,7 +2,6 @@ package org.abendigo.misc;
 
 import org.abendigo.process.Module;
 
-import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 public final class PatternScanner {
@@ -24,7 +23,7 @@ public final class PatternScanner {
 	public static int getAddressForPattern(Module module, int pattern_offset, int address_offset, int flags, byte... values) {
 		long off = module.size() - values.length;
 		for (int i = 0; i < off; i++) {
-			if (checkMask(module.data(), i, values)) {
+			if (checkMask(module, i, values)) {
 				i += module.address() + pattern_offset;
 				if ((flags & READ) == READ) {
 					i = module.process().read(i, 4).getInt();
@@ -38,9 +37,9 @@ public final class PatternScanner {
 		throw new IllegalStateException("Can not find offset inside of " + module.name() + " with pattern " + Arrays.toString(values));
 	}
 
-	private static boolean checkMask(ByteBuffer data, int offset, byte[] pMask) {
+	private static boolean checkMask(Module module, int offset, byte[] pMask) {
 		for (int i = 0; i < pMask.length; i++) {
-			if (pMask[i] != 0x0 && (pMask[i] != data.get(offset + i))) {
+			if (pMask[i] != 0x0 && (pMask[i] != module.data().get(offset + i))) {
 				return false;
 			}
 		}
