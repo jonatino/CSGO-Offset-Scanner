@@ -51,13 +51,16 @@ public final class NetVars {
 		for (int i = 0; i < count; i++) {
 			RecvProp prop = new RecvProp(table.propForId(i), offset);
 
-			if (Character.isDigit(prop.name().charAt(0))) {
+			String propName = prop.name();
+			int propOffset = prop.offset();
+
+			if (Character.isDigit(propName.charAt(0))) {
 				continue;
 			}
 
-			boolean isBaseClass = prop.name().contains("baseclass");
+			boolean isBaseClass = propName.contains("baseclass");
 			if (!isBaseClass) {
-				netVars.add(new NetVar(name, prop.name(), prop.offset()));
+				netVars.add(new NetVar(name, propName, propOffset));
 			}
 
 			int child = prop.table();
@@ -65,7 +68,7 @@ public final class NetVars {
 				continue;
 			}
 
-			scanTable(new RecvTable(child), prop.offset(), name);
+			scanTable(new RecvTable(child), propOffset, name);
 		}
 	}
 
