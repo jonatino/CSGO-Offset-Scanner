@@ -53,4 +53,9 @@ public final class WindowsProcess implements NativeProcess {
 		return buffer;
 	}
 
+	@Override
+	public boolean canRead(Pointer address, int bytesToRead) {
+		return Kernel32.ReadProcessMemory(pointer(), address, Cacheable.buffer(bytesToRead), bytesToRead, 0);
+	}
+
 }

@@ -32,11 +32,7 @@ public final class RecvTable {
 	}
 
 	public boolean readable() {
-		try {
-			return csgo.read(base, offset) != null;
-		} catch (Exception e) {
-			return false;
-		}
+		return csgo.canRead(base, offset);
 	}
 
 

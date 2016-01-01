@@ -25,7 +25,13 @@ public interface NativeProcess {
 		return read(Cacheable.pointer(address), bytesToRead);
 	}
 
+	default boolean canRead(long address, int bytesToRead) {
+		return canRead(Cacheable.pointer(address), bytesToRead);
+	}
+
 	ByteBuffer read(Pointer address, int bytesToRead);
+
+	boolean canRead(Pointer address, int bytesToRead);
 
 	static NativeProcess byName(String name) {
 		String os = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
