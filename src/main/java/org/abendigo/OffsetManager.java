@@ -1,9 +1,9 @@
 package org.abendigo;
 
+import com.beaudoin.jmm.process.Module;
+import com.beaudoin.jmm.process.NativeProcess;
 import org.abendigo.netvars.NetVars;
 import org.abendigo.offsets.Offsets;
-import org.abendigo.process.Module;
-import org.abendigo.process.NativeProcess;
 
 /**
  * Created by Jonathan on 12/22/2015.

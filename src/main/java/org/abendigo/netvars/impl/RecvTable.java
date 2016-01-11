@@ -1,7 +1,5 @@
 package org.abendigo.netvars.impl;
 
-import org.abendigo.misc.Strings;
-
 import static org.abendigo.OffsetManager.csgo;
 
 /**
@@ -18,17 +16,15 @@ public final class RecvTable {
 	}
 
 	public int propForId(int id) {
-		return csgo.read(base, 4).getInt() + (id * 0x3C);
+		return csgo.readInt(base) + (id * 0x3C);
 	}
 
 	public String tableName() {
-		byte[] bytes = new byte[32];
-		csgo.read(csgo.read(base + 0xC, 4).getInt(), bytes.length).get(bytes);
-		return Strings.transform(bytes);
+		return csgo.readString(csgo.readInt(base + 0xC), 32);
 	}
 
 	public int propCount() {
-		return csgo.read(base + 0x4, 4).getInt();
+		return csgo.readInt(base + 0x4);
 	}
 
 	public boolean readable() {

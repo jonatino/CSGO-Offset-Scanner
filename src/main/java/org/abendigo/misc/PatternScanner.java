@@ -1,6 +1,7 @@
 package org.abendigo.misc;
 
-import org.abendigo.process.Module;
+
+import com.beaudoin.jmm.process.Module;
 
 import java.util.Arrays;
 
@@ -26,7 +27,7 @@ public final class PatternScanner {
 			if (checkMask(module, i, values)) {
 				i += module.address() + pattern_offset;
 				if ((flags & READ) == READ) {
-					i = module.process().read(i, 4).getInt();
+					i = module.process().readInt(i);
 				}
 				if ((flags & SUBTRACT) == SUBTRACT) {
 					i -= module.address();
@@ -39,7 +40,7 @@ public final class PatternScanner {
 
 	private static boolean checkMask(Module module, int offset, byte[] pMask) {
 		for (int i = 0; i < pMask.length; i++) {
-			if (pMask[i] != 0x0 && (pMask[i] != module.data().get(offset + i))) {
+			if (pMask[i] != 0x0 && (pMask[i] != module.data().getByte(offset + i))) {
 				return false;
 			}
 		}

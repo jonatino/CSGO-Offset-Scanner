@@ -1,6 +1,6 @@
 package org.abendigo.offsets;
 
-import org.abendigo.misc.Strings;
+import com.beaudoin.jmm.misc.Strings;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

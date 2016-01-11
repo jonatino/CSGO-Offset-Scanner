@@ -1,7 +1,5 @@
 package org.abendigo.netvars.impl;
 
-import org.abendigo.misc.Strings;
-
 import static org.abendigo.OffsetManager.csgo;
 
 /**
@@ -16,21 +14,19 @@ public final class ClientClass {
 	}
 
 	public int classId() {
-		return csgo.read(base + 0x14, 4).getInt();
+		return csgo.readInt(base + 0x14);
 	}
 
 	public String className() {
-		byte[] bytes = new byte[64];
-		csgo.read(csgo.read(base + 0x8, 4).getInt(), bytes.length).get(bytes);
-		return Strings.transform(bytes);
+		return csgo.readString(csgo.readInt(base + 0x8), 64);
 	}
 
 	public int next() {
-		return csgo.read(base + 0x10, 4).getInt();
+		return csgo.readInt(base + 0x10);
 	}
 
 	public int table() {
-		return csgo.read(base + 0xC, 4).getInt();
+		return csgo.readInt(base + 0xC);
 	}
 
 	public boolean readable() {

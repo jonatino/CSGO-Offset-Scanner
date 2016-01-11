@@ -1,6 +1,6 @@
 package org.abendigo.netvars;
 
-import org.abendigo.misc.Strings;
+import com.beaudoin.jmm.misc.Strings;
 import org.abendigo.netvars.impl.ClientClass;
 import org.abendigo.netvars.impl.RecvProp;
 import org.abendigo.netvars.impl.RecvTable;
@@ -29,10 +29,9 @@ public final class NetVars {
 
 		for (ClientClass clientClass = new ClientClass(firstclass); clientClass.readable(); clientClass = new ClientClass(clientClass.next())) {
 			RecvTable table = new RecvTable(clientClass.table());
-			if (!table.readable()) {
-				continue;
+			if (table.tableName().length() > 0 && table.propCount() > 0) {
+				scanTable(table, 0, table.tableName());
 			}
-			scanTable(table, 0, table.tableName());
 		}
 	}
 
@@ -47,8 +46,7 @@ public final class NetVars {
 	}
 
 	private static void scanTable(RecvTable table, int offset, String name) {
-		int count = table.propCount();
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < table.propCount(); i++) {
 			RecvProp prop = new RecvProp(table.propForId(i), offset);
 
 			String propName = prop.name();
@@ -58,8 +56,7 @@ public final class NetVars {
 				continue;
 			}
 
-			boolean isBaseClass = propName.contains("baseclass");
-			if (!isBaseClass) {
+			if (propOffset != 0x0) {
 				netVars.add(new NetVar(name, propName, propOffset));
 			}
 
