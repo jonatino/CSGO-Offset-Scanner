@@ -9,6 +9,8 @@ import org.abendigo.offsets.Offsets;
 public final class Main {
 
 	public static void main(String... args) {
+
+
 		OffsetManager.initAll();
 
 		NetVars.dump();
