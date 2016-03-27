@@ -8,6 +8,7 @@ import org.abendigo.netvars.impl.RecvTable;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import static org.abendigo.misc.PatternScanner.getAddressForPattern;
  */
 public final class NetVars {
 
-	private static final List<NetVar> netVars = new ArrayList<>(16_500);
+	private static final ArrayDeque<NetVar> netVars = new ArrayDeque<>(16_500);
 
 	public static void load() {
 		int firstclass = getAddressForPattern(clientModule(), 0, 0, 0, "DT_TEWorldDecal");

@@ -134,8 +134,6 @@ public final class Offsets {
 
         m_dwModel = 0x6C;
         m_dwIndex = 0x64;
-        System.out.println(m_bDormant);
-
         m_bMoveType = 0x258;
     }
 
