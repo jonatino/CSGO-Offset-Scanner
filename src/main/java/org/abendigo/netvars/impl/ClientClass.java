@@ -1,6 +1,6 @@
 package org.abendigo.netvars.impl;
 
-import static org.abendigo.OffsetManager.csgo;
+import static org.abendigo.OffsetManager.process;
 
 /**
  * Created by Jonathan on 11/16/2015.
@@ -14,23 +14,23 @@ public final class ClientClass {
 	}
 
 	public int classId() {
-		return csgo.readInt(base + 0x14);
+		return process().readInt(base + 0x14);
 	}
 
 	public String className() {
-		return csgo.readString(csgo.readInt(base + 0x8), 64);
+		return process().readString(process().readInt(base + 0x8), 64);
 	}
 
 	public int next() {
-		return csgo.readInt(base + 0x10);
+		return process().readInt(base + 0x10);
 	}
 
 	public int table() {
-		return csgo.readInt(base + 0xC);
+		return process().readInt(base + 0xC);
 	}
 
 	public boolean readable() {
-		return csgo.canRead(base, 0x28);
+		return process().canRead(base, 0x28);
 	}
 
 }

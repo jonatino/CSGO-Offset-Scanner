@@ -24,8 +24,8 @@ public final class NetVars {
 	private static final List<NetVar> netVars = new ArrayList<>(16_500);
 
 	public static void load() {
-		int firstclass = getAddressForPattern(clientModule, 0, 0, 0, "DT_TEWorldDecal");
-		firstclass = getAddressForPattern(clientModule, 0x2B, 0, READ, firstclass);
+		int firstclass = getAddressForPattern(clientModule(), 0, 0, 0, "DT_TEWorldDecal");
+		firstclass = getAddressForPattern(clientModule(), 0x2B, 0, READ, firstclass);
 
 		for (ClientClass clientClass = new ClientClass(firstclass); clientClass.readable(); clientClass = new ClientClass(clientClass.next())) {
 			RecvTable table = new RecvTable(clientClass.table());

@@ -1,6 +1,6 @@
 package org.abendigo.netvars.impl;
 
-import static org.abendigo.OffsetManager.csgo;
+import static org.abendigo.OffsetManager.process;
 
 /**
  * Created by Jonathan on 11/16/2015.
@@ -16,19 +16,19 @@ public final class RecvTable {
 	}
 
 	public int propForId(int id) {
-		return csgo.readInt(base) + (id * 0x3C);
+		return process().readInt(base) + (id * 0x3C);
 	}
 
 	public String tableName() {
-		return csgo.readString(csgo.readInt(base + 0xC), 32);
+		return process().readString(process().readInt(base + 0xC), 32);
 	}
 
 	public int propCount() {
-		return csgo.readInt(base + 0x4);
+		return process().readInt(base + 0x4);
 	}
 
 	public boolean readable() {
-		return csgo.canRead(base, offset);
+		return process().canRead(base, offset);
 	}
 
 
