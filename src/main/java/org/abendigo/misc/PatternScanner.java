@@ -47,11 +47,11 @@ public final class PatternScanner {
 		return true;
 	}
 
-	public static byte[] toByteArray(int value) {
+	private static byte[] toByteArray(int value) {
 		return new byte[]{(byte) value, (byte) (value >> 8), (byte) (value >> 16), (byte) (value >> 24)};
 	}
 
-	public static byte[] toByteArray(int... value) {
+	private static byte[] toByteArray(int... value) {
 		byte[] byteVals = new byte[value.length];
 		for (int i = 0; i < value.length; i++) {
 			byteVals[i] = (byte) value[i];

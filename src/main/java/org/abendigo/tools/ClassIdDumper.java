@@ -5,10 +5,12 @@ import org.abendigo.netvars.impl.ClientClass;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.abendigo.OffsetManager.clientModule;
+import static org.abendigo.OffsetManager.process;
 import static org.abendigo.misc.PatternScanner.READ;
 import static org.abendigo.misc.PatternScanner.getAddressForPattern;
 
@@ -17,9 +19,17 @@ import static org.abendigo.misc.PatternScanner.getAddressForPattern;
  */
 public final class ClassIdDumper {
 
+
 	public static void main(String[] args) {
 		int firstclass = getAddressForPattern(clientModule(), 0, 0, 0, "DT_TEWorldDecal");
 		firstclass = getAddressForPattern(clientModule(), 0x2B, 0, READ, firstclass);
+
+		try {
+			System.out.println(clientModule().size());
+			Files.write(Paths.get("hello.txt"), process().readString(clientModule().address(), clientModule().size()).getBytes(), StandardOpenOption.CREATE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		List<String> text = new ArrayList<>();
 		for (ClientClass clientClass = new ClientClass(firstclass); clientClass.readable(); clientClass = new ClientClass(clientClass.next())) {

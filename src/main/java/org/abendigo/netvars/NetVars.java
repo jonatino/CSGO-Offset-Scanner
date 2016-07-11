@@ -46,7 +46,7 @@ public final class NetVars {
 		}
 	}
 
-	private static void scanTable(RecvTable table, int offset, String name) {
+	private static void scanTable(RecvTable table, int offset, String className) {
 		for (int i = 0; i < table.propCount(); i++) {
 			RecvProp prop = new RecvProp(table.propForId(i), offset);
 
@@ -58,7 +58,7 @@ public final class NetVars {
 			}
 
 			if (propOffset != 0x0) {
-				netVars.add(new NetVar(name, propName, propOffset));
+				netVars.add(new NetVar(className, propName, propOffset));
 			}
 
 			int child = prop.table();
@@ -66,7 +66,7 @@ public final class NetVars {
 				continue;
 			}
 
-			scanTable(new RecvTable(child), propOffset, name);
+			scanTable(new RecvTable(child), propOffset, className);
 		}
 	}
 
