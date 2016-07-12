@@ -9,11 +9,17 @@ import static org.abendigo.OffsetManager.process;
 public final class RecvProp {
 
 	private int base;
+
+	public RecvProp setBase(int base) {
+		this.base = base;
+		return this;
+	}
+
 	private int offset;
 
-	public RecvProp(int base, int offset) {
-		this.base = base;
+	public RecvProp setOffset(int offset) {
 		this.offset = offset;
+		return this;
 	}
 
 	public int table() {

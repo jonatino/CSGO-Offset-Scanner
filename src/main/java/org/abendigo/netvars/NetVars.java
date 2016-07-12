@@ -24,14 +24,20 @@ public final class NetVars {
 
 	private static final ArrayDeque<NetVar> netVars = new ArrayDeque<>(16_500);
 
+	private static final ClientClass clientClass = new ClientClass();
+	private static final RecvTable table = new RecvTable();
+	private static final RecvTable childTable = new RecvTable();
+	private static final RecvProp prop = new RecvProp();
+
 	public static void load() {
 		int firstclass = getAddressForPattern(clientModule(), 0, 0, 0, "DT_TEWorldDecal");
 		firstclass = getAddressForPattern(clientModule(), 0x2B, 0, READ, firstclass);
 
-		for (ClientClass clientClass = new ClientClass(firstclass); clientClass.readable(); clientClass = new ClientClass(clientClass.next())) {
-			RecvTable table = new RecvTable(clientClass.table());
-			if (table.tableName().length() > 0 && table.propCount() > 0) {
-				scanTable(table, 0, table.tableName());
+		for (clientClass.setBase(firstclass); clientClass.readable(); clientClass.setBase(clientClass.next())) {
+			table.setBase(clientClass.table());
+			String tableName = table.tableName();
+			if (tableName.length() > 0 && table.propCount() > 0) {
+				scanTable(table, 0, tableName);
 			}
 		}
 	}
@@ -48,7 +54,8 @@ public final class NetVars {
 
 	private static void scanTable(RecvTable table, int offset, String className) {
 		for (int i = 0; i < table.propCount(); i++) {
-			RecvProp prop = new RecvProp(table.propForId(i), offset);
+			prop.setBase(table.propForId(i));
+			prop.setOffset(offset);
 
 			String propName = prop.name();
 			int propOffset = prop.offset();
@@ -65,8 +72,7 @@ public final class NetVars {
 			if (child == 0) {
 				continue;
 			}
-
-			scanTable(new RecvTable(child), propOffset, className);
+			scanTable(new RecvTable().setBase(child), propOffset, className);
 		}
 	}
 

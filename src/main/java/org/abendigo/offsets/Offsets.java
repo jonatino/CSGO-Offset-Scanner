@@ -72,6 +72,7 @@ public final class Offsets {
     public static int m_vecOrigin;
     public static int m_iClip1;
     public static int m_iClip2;
+    public static int m_hMyWeapons;
 
     public static void load() {
         /**
@@ -115,6 +116,9 @@ public final class Offsets {
         m_flFlashMaxAlpha = byName("DT_CSPlayer", "m_flFlashMaxAlpha");
         m_iShotsFired = byName("DT_CSPlayer", "m_iShotsFired");
         m_bIsScoped = byName("DT_CSPlayer", "m_bIsScoped");
+
+        m_hMyWeapons = byName("DT_CSPlayer", "m_hMyWeapons");
+
 
         m_flNextPrimaryAttack = byName("DT_BaseCombatWeapon", "m_flNextPrimaryAttack");
         m_iClip1 = byName("DT_BaseCombatWeapon", "m_iClip1");

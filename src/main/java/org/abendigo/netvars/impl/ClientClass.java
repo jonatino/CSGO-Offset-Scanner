@@ -9,8 +9,9 @@ public final class ClientClass {
 
 	private int base;
 
-	public ClientClass(int base) {
+	public ClientClass setBase(int base) {
 		this.base = base;
+		return this;
 	}
 
 	public int classId() {
