@@ -44,7 +44,7 @@ public final class OffsetManager {
 
         waitUntilFound("process", () -> (process = NativeProcess.byName(procBaseName.toString())) != null);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
