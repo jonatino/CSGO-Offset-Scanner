@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/Jonatino/Abendigo-Offset-Scanner.svg?branch=master)](https://travis-ci.org/Jonatino/Abendigo-Offset-Scanner)
+[![license](https://img.shields.io/badge/license-LGPL%203.0-yellowgreen.svg)](https://github.com/Jonatino/Abendigo-Offset-Scanner/blob/master/LICENSE)
+[![Release](https://jitpack.io/v/Jonatino/Abendigo-Offset-Scanner.svg)](https://jitpack.io/#Jonatino/Abendigo-Offset-Scanner)
+
 # Abendigo-Offset-Scanner
 _Java Based CSGO Offset Scanner_
 
