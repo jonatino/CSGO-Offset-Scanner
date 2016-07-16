@@ -1,0 +1,18 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'org.abendigo'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile "net.java.dev.jna:jna-platform:4.2.2"
+    compile "org.projectlombok:lombok:1.16.8"
+    compile "com.github.Jonatino:Java-Memory-Manipulation:1.0"
+    compile "net.openhft:zero-allocation-hashing:0.6"
+}
