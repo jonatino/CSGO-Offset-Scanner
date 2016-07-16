@@ -1,7 +1,7 @@
 @echo off
 title Abendigo
 
-set bat="./build/install/Xena/bin/Xena.bat"
+set bat="./build/install/Offset-Scanner/bin/Offset-Scanner.bat"
 
 :loop
 if exist %bat% (
