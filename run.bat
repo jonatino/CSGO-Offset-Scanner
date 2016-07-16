@@ -10,6 +10,6 @@ if exist %bat% (
 ) else (
     call build.bat
     cls
-    title Xena
+    title Offset-Scanner
     goto loop
 )
