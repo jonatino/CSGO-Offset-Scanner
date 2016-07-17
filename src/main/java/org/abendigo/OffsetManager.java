@@ -43,11 +43,6 @@ public final class OffsetManager {
         }
 
         waitUntilFound("process", () -> (process = NativeProcess.byName(procBaseName.toString())) != null);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         waitUntilFound("client module", () -> (clientModule = process.findModule(clientBaseName.toString())) != null);
         waitUntilFound("engine module", () -> (engineModule = process.findModule(engineBaseName.toString())) != null);
     }
