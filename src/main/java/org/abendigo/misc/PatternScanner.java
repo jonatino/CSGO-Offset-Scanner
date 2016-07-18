@@ -41,7 +41,7 @@ public final class PatternScanner {
 
 	private static boolean checkMask(Module module, int offset, byte[] pMask) {
 		for (int i = 0; i < pMask.length; i++) {
-			if (pMask[i] != 0x0 && (pMask[i] != module.data(true).getByte(offset + i))) { //TODO Why does forcing new use less ram?
+			if (pMask[i] != 0x0 && (pMask[i] != module.data().getByte(offset + i))) {
 				return false;
 			}
 		}
