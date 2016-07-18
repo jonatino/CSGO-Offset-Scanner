@@ -42,9 +42,13 @@ public final class OffsetManager {
             throw new RuntimeException("Unsupported operating system type!");
         }
 
-        waitUntilFound("process", () -> (process = NativeProcess.byName(procBaseName.toString())) != null);
-        waitUntilFound("client module", () -> (clientModule = process.findModule(clientBaseName.toString())) != null);
-        waitUntilFound("engine module", () -> (engineModule = process.findModule(engineBaseName.toString())) != null);
+        String processName = procBaseName.toString();
+        String clientName = clientBaseName.toString();
+        String engineName = engineBaseName.toString();
+
+        waitUntilFound("process", () -> (process = NativeProcess.byName(processName)) != null);
+        waitUntilFound("client module", () -> (clientModule = process.findModule(clientName)) != null);
+        waitUntilFound("engine module", () -> (engineModule = process.findModule(engineName)) != null);
     }
 
     public static void initAll() {
