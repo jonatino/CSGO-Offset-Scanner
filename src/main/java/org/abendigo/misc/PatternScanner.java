@@ -1,6 +1,7 @@
 package org.abendigo.misc;
 
 
+import com.beaudoin.jmm.misc.Cacheable;
 import com.beaudoin.jmm.process.Module;
 
 import java.util.Arrays;
@@ -40,7 +41,7 @@ public final class PatternScanner {
 
 	private static boolean checkMask(Module module, int offset, byte[] pMask) {
 		for (int i = 0; i < pMask.length; i++) {
-			if (pMask[i] != 0x0 && (pMask[i] != module.data().getByte(offset + i))) {
+			if (pMask[i] != 0x0 && (pMask[i] != module.data(true).getByte(offset + i))) { //TODO Why does forcing new use less ram?
 				return false;
 			}
 		}
@@ -52,7 +53,7 @@ public final class PatternScanner {
 	}
 
 	private static byte[] toByteArray(int... value) {
-		byte[] byteVals = new byte[value.length];
+		byte[] byteVals = Cacheable.array(value.length);
 		for (int i = 0; i < value.length; i++) {
 			byteVals[i] = (byte) value[i];
 		}
