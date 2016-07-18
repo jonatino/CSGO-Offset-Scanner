@@ -26,7 +26,6 @@ public final class NetVars {
 
 	private static final ClientClass clientClass = new ClientClass();
 	private static final RecvTable table = new RecvTable();
-	private static final RecvTable childTable = new RecvTable();
 	private static final RecvProp prop = new RecvProp();
 
 	public static void load() {
