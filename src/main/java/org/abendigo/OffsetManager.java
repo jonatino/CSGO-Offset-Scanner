@@ -1,6 +1,7 @@
 package org.abendigo;
 
 import com.beaudoin.jmm.process.Module;
+import com.beaudoin.jmm.process.Process;
 import com.beaudoin.jmm.process.Processes;
 import com.sun.jna.Platform;
 import org.abendigo.netvars.NetVars;
