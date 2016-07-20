@@ -17,7 +17,6 @@ import static org.abendigo.misc.PatternScanner.getAddressForPattern;
  */
 public final class ClassIdDumper {
 
-
 	public static void main(String[] args) {
 		int firstclass = getAddressForPattern(clientModule(), 0, 0, 0, "DT_TEWorldDecal");
 		firstclass = getAddressForPattern(clientModule(), 0x2B, 0, READ, firstclass);
