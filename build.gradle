@@ -40,7 +40,7 @@ allprojects {
 group project_group
 version project_version
 
-mainClassName = "org.abendigo.Main"
+mainClassName = "com.github.jonatino.Main"
 
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
