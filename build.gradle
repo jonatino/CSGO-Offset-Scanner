@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2016 Jonathan Beaudoin
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 buildscript {
     ext.your_github_name = 'Jonatino'
     ext.your_name = 'Jonathan Beaudoin'
@@ -5,16 +21,9 @@ buildscript {
 
     ext.project_name = 'Abendigo-Offset-Scanner'
     ext.project_description = 'Java Based Cross-Platform CSGO Offset and Netvar Scanner'
-    ext.project_group = 'org.abendigo'
+    ext.project_group = 'com.github.jonatino'
     ext.project_artifact = 'Abendigo-Offset-Scanner'
-    ext.project_version = '1.6.1'
-
-    ext.jna_version = '4.3.0-SNAPSHOT'
-
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
+    ext.project_version = '1.6.2'
 }
 
 plugins {
@@ -65,7 +74,7 @@ publishing {
                     }
                     licenses {
                         license {
-                            name 'The GNU General Public License, Version 3.0'
+                            name 'Apache License 2.0'
                             url 'https://raw.githubusercontent.com/$your_github_name/$project_name/master/LICENSE'
                             distribution 'repo'
                         }
@@ -90,7 +99,7 @@ bintray {
     pkg {
         repo = 'maven'
         name = project_name
-        licenses = ['GPL-3.0']
+        licenses = ['Apache-2.0']
         publicDownloadNumbers = true
         websiteUrl = "https://github.com/$your_github_name/$project_name"
         issueTrackerUrl = "https://github.com/$your_github_name/$project_name/issues"
@@ -108,14 +117,10 @@ bintray {
 
 repositories {
     mavenCentral()
-    jcenter()
 
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 dependencies {
-    compile "net.openhft:zero-allocation-hashing:0.6"
-    compile "net.java.dev.jna:jna:$jna_version"
-    compile "net.java.dev.jna:jna-platform:$jna_version"
-    compile 'com.beaudoin.jmm:Java-Memory-Manipulation:1.6.3'
+    compile 'com.github.jonatino:Java-Memory-Manipulation:1.6.6'
 }
