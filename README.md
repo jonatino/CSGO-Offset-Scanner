@@ -6,8 +6,8 @@
 # Abendigo-Offset-Scanner
 _Java Based CSGO Offset Scanner_
 
-This library is licensed under LGPL 3.0 and was created for use in my game modding platform called Abendigo which you
-can see here: [https://github.com/Jire/Abendigo](https://github.com/Jire/Abendigo)  or you can visit our community here: https://abendigo.org
+This library is licensed under the Apache License 2.0 and was created for use in my game modding platform called Abendigo which you
+can see here: [https://github.com/Jire/Abendigo](https://github.com/Jire/Abendigo)
 
 ---
 
