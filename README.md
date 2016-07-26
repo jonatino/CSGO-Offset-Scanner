@@ -9,7 +9,7 @@ _Java Based CSGO Offset Scanner_
 This library is licensed under the Apache License 2.0 and was created for use in my game modding platform called Abendigo which you
 can see here: [https://github.com/Jire/Abendigo](https://github.com/Jire/Abendigo)
 
-This project is a utility for my CSGO cheat Abendigo. This utility is used to scan the memory using byte-patterns to find the relative memory addresses for our cheat.
+This utility is used to scan the memory using byte-patterns to find the relative memory addresses for our cheat.
 
 ### Gradle
 ```groovy
