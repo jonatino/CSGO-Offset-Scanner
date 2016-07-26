@@ -30,9 +30,7 @@ compile 'com.github.jonatino:Abendigo-Offset-Scanner:1.6.3'
 
 ## Dependencies
 
-We use some really cool technology to drive Abendigo. Here's a list:
-
-- [Java Native Access (JNA)](https://github.com/java-native-access/jna) as the backbone for interfacing with native libraries
+- [Java-Memory-Manipulation](https://github.com/Jonatino/Java-Memory-Manipulation) as the foundation for memory reading/writing
 
 ## Plans
 
