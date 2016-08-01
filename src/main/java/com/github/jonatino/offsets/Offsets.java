@@ -58,7 +58,11 @@ public final class Offsets {
 	public static int m_OriginalOwnerXuidLow;
 	public static int m_iItemIDHigh;
 	public static int m_iAccountID;
-
+	public static int iViewModelIndex;
+	public static int iWorldModelIndex;
+	public static int m_iWorldDroppedModelIndex;
+	public static int m_hViewModel;
+	public static int m_nModelIndex;
 	/**
 	 * Engine.dll offsets
 	 */
@@ -175,6 +179,11 @@ public final class Offsets {
 		m_OriginalOwnerXuidLow = NetVars.byName("DT_WeaponCSBase", "m_OriginalOwnerXuidLow");
 		m_iItemIDHigh = NetVars.byName("DT_WeaponCSBase", "m_iItemIDHigh");
 		m_iAccountID = NetVars.byName("DT_WeaponCSBase", "m_iAccountID");
+		iViewModelIndex = NetVars.byName("DT_WeaponCSBase", "m_iViewModelIndex");
+		iWorldModelIndex = NetVars.byName("DT_WeaponCSBase", "m_iWorldModelIndex");
+		m_iWorldDroppedModelIndex = NetVars.byName("DT_WeaponCSBase", "m_iWorldDroppedModelIndex");
+		m_hViewModel = NetVars.byName("DT_CSPlayer", "m_hViewModel[0]");
+		m_nModelIndex = NetVars.byName("DT_BaseViewModel", "m_nModelIndex");
 
 		m_dwModel = 0x6C;
 		m_dwIndex = 0x64;
