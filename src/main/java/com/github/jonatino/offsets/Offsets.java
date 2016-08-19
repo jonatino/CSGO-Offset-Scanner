@@ -167,7 +167,7 @@ public final class Offsets {
 
 		m_dwBoneMatrix = byName("DT_BaseAnimating", "m_nForceBone") + 0x1C;
 
-		m_iCrossHairID = byName("DT_CSPlayer", "m_bHasDefuser") + 0x4C;
+		m_iCrossHairID = byName("DT_CSPlayer", "m_bHasDefuser") + 0x5C;
 
 		m_iAccountID = NetVars.byName("DT_WeaponCSBase", "m_iAccountID");
 		m_nFallbackPaintKit = NetVars.byName("DT_WeaponCSBase", "m_nFallbackPaintKit");

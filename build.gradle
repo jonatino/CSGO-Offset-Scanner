@@ -23,7 +23,7 @@ buildscript {
     ext.project_description = 'Java Based Cross-Platform CSGO Offset and Netvar Scanner'
     ext.project_group = 'com.github.jonatino'
     ext.project_artifact = 'Abendigo-Offset-Scanner'
-    ext.project_version = '1.6.4'
+    ext.project_version = '1.6.5'
 }
 
 plugins {
