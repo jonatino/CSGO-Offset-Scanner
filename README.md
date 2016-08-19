@@ -13,7 +13,7 @@ This utility is used to scan the memory using byte-patterns to find the relative
 
 ### Gradle
 ```groovy
-compile 'com.github.jonatino:Abendigo-Offset-Scanner:1.6.3'
+compile 'com.github.jonatino:Abendigo-Offset-Scanner:1.6.4'
 ```
 
 ### Maven
@@ -21,7 +21,7 @@ compile 'com.github.jonatino:Abendigo-Offset-Scanner:1.6.3'
 <dependency>
   <groupId>com.github.jonatino</groupId>
   <artifactId>Abendigo-Offset-Scanner</artifactId>
-  <version>1.6.3</version>
+  <version>1.6.4</version>
   <type>pom</type>
 </dependency>
 ```
