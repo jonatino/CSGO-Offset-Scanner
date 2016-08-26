@@ -1,5 +1,5 @@
 @echo off
-cd "%~dp0"
+cd /d "%~dp0"
 title Offset-Scanner
 
 set bat="./build/install/Offset-Scanner/bin/Offset-Scanner.bat"
