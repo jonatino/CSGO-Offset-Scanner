@@ -23,7 +23,7 @@ buildscript {
     ext.project_description = 'Java Based Cross-Platform CSGO Offset and Netvar Scanner'
     ext.project_group = 'com.github.jonatino'
     ext.project_artifact = 'Abendigo-Offset-Scanner'
-    ext.project_version = '1.6.5'
+    ext.project_version = '1.6.6'
 }
 
 plugins {
@@ -117,10 +117,10 @@ bintray {
 
 repositories {
     mavenCentral()
-
+	
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 dependencies {
-    compile 'com.github.jonatino:Java-Memory-Manipulation:1.6.6'
+    compile 'com.github.jonatino:Java-Memory-Manipulation:2.0'
 }
