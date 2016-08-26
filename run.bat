@@ -1,5 +1,6 @@
 @echo off
-title Abendigo
+cd "%~dp0"
+title Offset-Scanner
 
 set bat="./build/install/Offset-Scanner/bin/Offset-Scanner.bat"
 
