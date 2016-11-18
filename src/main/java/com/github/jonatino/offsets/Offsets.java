@@ -77,7 +77,7 @@ public final class Offsets {
 	public static int m_flFlashMaxAlpha;
 	public static int m_bCanReload;
 	public static int m_bSendPacket;
-	public static int m_dwForceFullUpdate;
+	//public static int m_dwForceFullUpdate;
 	public static int m_dwLocalPlayerIndex;
 	public static int m_iTeamNum;
 	public static int m_bDormant;
@@ -135,7 +135,7 @@ public final class Offsets {
 		m_dwEnginePosition = PatternScanner.getAddressForPattern(OffsetManager.engineModule(), 0x4, 0x0, PatternScanner.READ | PatternScanner.SUBTRACT, 0xF3, 0x0F, 0x11, 0x15, 0x00, 0x00, 0x00, 0x00, 0xF3, 0x0F, 0x11, 0x0D, 0x00, 0x00, 0x00, 0x00, 0xF3, 0x0F, 0x11, 0x05, 0x00, 0x00, 0x00, 0x00, 0xF3, 0x0F, 0x11, 0x3D, 0x00, 0x00, 0x00, 0x00);
 		m_dwLocalPlayerIndex = PatternScanner.getAddressForPattern(OffsetManager.engineModule(), 0x2, 0x0, PatternScanner.READ, 0x8B, 0x80, 0x00, 0x00, 0x00, 0x00, 0x40, 0xC3);
 		m_bSendPacket = PatternScanner.getAddressForPattern(OffsetManager.engineModule(), 0, 0, PatternScanner.SUBTRACT, 0x01, 0x8B, 0x01, 0x8B, 0x40, 0x10);
-		m_dwForceFullUpdate = PatternScanner.getAddressForPattern(OffsetManager.engineModule(), 0x3, 0, PatternScanner.READ | PatternScanner.SUBTRACT, 0xB0, 0xFF, 0xB7, 0x00, 0x00, 0x00, 0x00, 0xE8);
+		//m_dwForceFullUpdate = PatternScanner.getAddressForPattern(OffsetManager.engineModule(), 0x3, 0, PatternScanner.READ | PatternScanner.SUBTRACT, 0xB0, 0xFF, 0xB7, 0x00, 0x00, 0x00, 0x00, 0xE8);
 		
 		m_fFlags = byName("DT_BasePlayer", "m_fFlags");
 		m_iHealth = byName("DT_BasePlayer", "m_iHealth");

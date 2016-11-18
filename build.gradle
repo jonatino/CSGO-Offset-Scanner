@@ -19,11 +19,11 @@ buildscript {
     ext.your_name = 'Jonathan Beaudoin'
     ext.your_email = 'jonathanbeaudoin1996@gmail.com'
 
-    ext.project_name = 'Abendigo-Offset-Scanner'
+    ext.project_name = 'CSGO-Offset-Scanner'
     ext.project_description = 'Java Based Cross-Platform CSGO Offset and Netvar Scanner'
     ext.project_group = 'com.github.jonatino'
-    ext.project_artifact = 'Abendigo-Offset-Scanner'
-    ext.project_version = '1.6.6'
+    ext.project_artifact = 'CSGO-Offset-Scanner'
+    ext.project_version = '1.6.7'
 }
 
 plugins {
