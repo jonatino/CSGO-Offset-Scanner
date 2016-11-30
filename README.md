@@ -1,10 +1,10 @@
-# Abendigo-Offset-Scanner
+# CSGO-Offset-Scanner
 _Java Based CSGO Offset Scanner_
 
-[![Build Status](https://travis-ci.org/Jonatino/Abendigo-Offset-Scanner.svg?branch=master)](https://travis-ci.org/Jonatino/Abendigo-Offset-Scanner)
+[![Build Status](https://travis-ci.org/Jonatino/CSGO-Offset-Scanner.svg?branch=master)](https://travis-ci.org/Jonatino/CSGO-Offset-Scanner)
 [![Dependency Status](https://www.versioneye.com/user/projects/578ab65fc3d40f004685241e/badge.svg?style=flat)](https://www.versioneye.com/user/projects/578ab65fc3d40f004685241e)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.jonatino/CSGO-Offset-Scanner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.jonatino/Abendigo-Offset-Scanner)
-[![license](https://img.shields.io/github/license/Jonatino/Abendigo-Offset-Scanner.svg?style=flat)](Apache License 2.0)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.jonatino/CSGO-Offset-Scanner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.jonatino/CSGO-Offset-Scanner)
+[![license](https://img.shields.io/github/license/Jonatino/CSGO-Offset-Scanner.svg?style=flat)](Apache License 2.0)
 
 This library is licensed under the Apache License 2.0 and was created for use in my game modding platform called Abendigo which you
 can see here: [https://github.com/Jire/Abendigo](https://github.com/Jire/Abendigo)
