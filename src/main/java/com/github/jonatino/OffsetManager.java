@@ -19,6 +19,7 @@ package com.github.jonatino;
 import com.github.jonatino.netvars.NetVars;
 import com.github.jonatino.offsets.Offsets;
 import com.github.jonatino.process.Module;
+import com.github.jonatino.process.Process;
 import com.github.jonatino.process.Processes;
 import com.sun.jna.Platform;
 

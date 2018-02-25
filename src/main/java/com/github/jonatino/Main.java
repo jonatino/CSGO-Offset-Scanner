@@ -25,6 +25,7 @@ import com.github.jonatino.offsets.Offsets;
 public final class Main {
 
 	public static void main(String... args) {
+		System.setProperty("jna.nosys", "true");
 		OffsetManager.initAll();
 
 		NetVars.dump();
