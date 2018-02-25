@@ -13,7 +13,7 @@ This utility is used to scan the memory using byte-patterns to find the relative
 
 ### Gradle
 ```groovy
-compile 'com.github.jonatino:CSGO-Offset-Scanner:1.6.8'
+compile 'com.github.jonatino:CSGO-Offset-Scanner:1.6.9'
 ```
 
 ### Maven
@@ -21,7 +21,7 @@ compile 'com.github.jonatino:CSGO-Offset-Scanner:1.6.8'
 <dependency>
   <groupId>com.github.jonatino</groupId>
   <artifactId>CSGO-Offset-Scanner</artifactId>
-  <version>1.6.8</version>
+  <version>1.6.9</version>
   <type>pom</type>
 </dependency>
 ```
